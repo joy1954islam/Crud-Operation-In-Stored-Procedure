@@ -1,0 +1,81 @@
+CREATE TABLE `hanif_enterprice`. `bus`( 
+`code` int(11) not null auto_increment,
+`name` VARCHAR(255) NOT NULL , 
+`bus_from` VARCHAR(30) NOT NULL , 
+`bus_to` VARCHAR(30) NOT NULL ,
+ `bus_date` DATE NOT NULL ,
+ `bus_time` time NOT NULL ,
+ `bus_class` VARCHAR(10) NOT NULL ,
+ `seat_number` VARCHAR(10) NOT NULL ,
+  `price` VARCHAR(10) NOT NULL ,
+ PRIMARY KEY (`code`)) ENGINE = InnoDB;
+
+
+
+#stored procedure in bus_insert
+
+DELIMITER $ 
+create procedure bus_Insert(
+     IN name varchar(200), 
+     IN bus_from varchar(50),
+     IN bus_to varchar(50),
+     IN bus_date date,
+     IN bus_time time,
+     IN bus_class varchar(10),
+     IN seat_number int,
+     IN price double)
+
+INSERT into bus(name,bus_from,bus_to,bus_date,bus_time,bus_class,seat_number,price)
+VALUES(name,bus_from,bus_to,bus_date,bus_time,bus_class,seat_number,price)$
+
+
+#stored procedure in bus_view
+
+DELIMITER $ 
+create procedure bus_view()
+  select * FROM bus $
+
+#Stored procedure bus_edit
+DELIMITER $ 
+create procedure bus_edit(
+ IN code int)
+
+select * from bus where code=code $
+
+
+#stored procedure in bus_update
+DELIMITER $ 
+
+create procedure bus_Update(
+     IN code int,
+     IN name varchar(200), 
+     IN bus_from varchar(50),
+     IN bus_to varchar(50),
+     IN bus_date date,
+     IN bus_time time,
+     IN bus_class varchar(10),
+     IN seat_number int,
+     IN price double
+	 )
+
+UPDATE bus set 
+    name=name,
+    bus_from=bus_from,
+    bus_to=bus_to,
+    bus_date=bus_date,
+    bus_time=bus_time,
+    bus_class =bus_class,
+    seat_number=seat_number,
+    price= price
+    where bus.code=code;
+
+$
+
+
+#stored procedure in bus_delete
+DELIMITER $ 
+create procedure bus_delete(
+ IN code int)
+ 
+DELETE FROM bus
+where bus.code=code $
